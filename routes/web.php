@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home.index');
 Route::resource('/category','Admin\CategoryController');
 Route::resource('/book','Admin\BookController');
 Route::resource('/age-setting','Admin\AgeController');
