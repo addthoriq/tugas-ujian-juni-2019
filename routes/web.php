@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/category','Admin\CategoryController');
+Route::resource('/book','Admin\BookController');
 Route::resource('/age-setting','Admin\AgeController');
 Route::resource('/loan-book','Admin\LoanController');
 Route::resource('/member','Admin\MemberController');
