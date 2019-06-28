@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -228,7 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
 
     ],
 
