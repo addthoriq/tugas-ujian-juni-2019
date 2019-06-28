@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title','Kategori Buku')
+@section('css')
+    <link rel="stylesheet" href="{{asset('adminlte3/plugins/datatables/dataTables.bootstrap4.css')}}">
+@endsection
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -48,18 +51,16 @@
     <!-- /.content -->
 @endsection
 @section('script')
-@section('script')
-  <script src="{{ asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-  <script src="{{ asset('adminlte/dist/js/custom.js') }}"></script>
-  <script type="text/javascript">
+    <script src="{{asset('adminlte3/plugins/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('adminlte3/plugins/datatables/dataTables.bootstrap4.js')}}"></script>
+    <script type="text/javascript">
     var table;
     $(function() {
         table = $('#example1').DataTable({
             processing: true,
             serverSide: true,
             ajax: '{{$ajax}}',
-            order: [[2,'desc']],
+            order: [[1,'desc']],
             columns: [
                 { data: 'id', searchable: true, orderable: true},
                 { data: 'name', searchable: true, orderable: true},
@@ -78,5 +79,6 @@
             }],
         });
     });
-  </script>
+    console.log(table);
+    </script>
 @endsection

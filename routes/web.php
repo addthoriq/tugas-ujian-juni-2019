@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home.index');
 
+// Yajra Routing
+Route::get('/category/data','Admin\CategoryController@data')->name('category.data');
+
 Route::resource('/category','Admin\CategoryController');
 Route::resource('/book','Admin\BookController');
 Route::resource('/age-setting','Admin\AgeController');
 Route::resource('/loan-book','Admin\LoanController');
 Route::resource('/member','Admin\MemberController');
-
-// Yajra Routing
-Route::get('/category/data','Admin\CategoryController@data')->name('category.data');
