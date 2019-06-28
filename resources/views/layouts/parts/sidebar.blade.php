@@ -43,13 +43,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('category.index')}}" class="nav-link {{Request::is('book','book/create')?'active':''}}">
+              <a href="{{route('category.index')}}" class="nav-link {{Request::is('category','category/create')?'active':''}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kategori Buku</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('book.index')}}" class="nav-link {{Request::is('category','category/create')?'active':''}}">
+              <a href="{{route('book.index')}}" class="nav-link {{Request::is('book','book/create')?'active':''}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Daftar Buku</p>
               </a>
