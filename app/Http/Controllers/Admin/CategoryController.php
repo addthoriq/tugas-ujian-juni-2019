@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Category;
+use DataTables;
+use Form;
 
 class CategoryController extends Controller
 {
@@ -12,9 +15,28 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    protected $folder   = 'categories';
+    public function index(Request $request)
     {
-        //
+        $data['ajax']   = route('category.data');
+        $data['create']   = route('category.create');
+        return view($this->folder.'.index', $data);
+    }
+
+    public function data(Request $request)
+    {
+        $data   = Category::select(['id','name']);
+        return DataTables::of($data)
+            ->addColumn('action', function ($index)
+            {
+                $tag    = Form::open(array("url" => route('category.destroy',$index->id), "method" => "DELETE"));
+                $tag   .= "<a href=".route('category.edit',$index->id)." class='btn btn-primary btn-xs'>Edit</a>";
+                $tag   .= "<button type='submit' class='delete btn btn-dange btn-xs'>Delete</button>";
+                $tag   .= Form::close();
+                return $tag;
+            })
+            ->rawColumn(['id','action'])
+            ->make(true);
     }
 
     /**

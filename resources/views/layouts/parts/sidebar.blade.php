@@ -34,7 +34,7 @@
           </a>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link {{Request::is('/book','/book/create','/category','/category/create')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('book','book/create','category','category/create')?'active':''}}">
             <i class="nav-icon fas fa-book"></i>
             <p>
               Buku
@@ -43,13 +43,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('category.index')}}" class="nav-link {{Request::is('/book','/book/create')?'active':''}}">
+              <a href="{{route('category.index')}}" class="nav-link {{Request::is('book','book/create')?'active':''}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kategori Buku</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('book.index')}}" class="nav-link {{Request::is('/category','/category/create')?'active':''}}">
+              <a href="{{route('book.index')}}" class="nav-link {{Request::is('category','category/create')?'active':''}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Daftar Buku</p>
               </a>
@@ -57,7 +57,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="{{route('loan-book.index')}}" class="nav-link {{Request::is('/loan-book','/loan-book/create')?'active':''}}">
+          <a href="{{route('loan-book.index')}}" class="nav-link {{Request::is('loan-book','loan-book/create')?'active':''}}">
             <i class="nav-icon fas fa-cog"></i>
             <p>
               Peminjaman
@@ -66,7 +66,7 @@
         </li>
         <li class="nav-header">Pengaturan</li>
         <li class="nav-item">
-          <a href="{{route('member.index')}}" class="nav-link {{Request::is('/member','/member/create')?'active':''}}">
+          <a href="{{route('member.index')}}" class="nav-link {{Request::is('member','member/create')?'active':''}}">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Anggota
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('age-setting.index')}}" class="nav-link {{Request::is('/age-setting','/age-setting/create')?'active':''}}">
+          <a href="{{route('age-setting.index')}}" class="nav-link {{Request::is('age-setting','age-setting/create')?'active':''}}">
             <i class="nav-icon fa fa-random"></i>
             <p>
               Batas Usia

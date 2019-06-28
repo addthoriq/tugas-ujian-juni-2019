@@ -29,5 +29,6 @@
 </div>
 <!-- ./wrapper -->
     @include('layouts.parts.script')
+    @yield('script')
 </body>
 </html>
