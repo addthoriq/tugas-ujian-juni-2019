@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 // Yajra Routing
 Route::get('/category/data','Admin\CategoryController@data')->name('category.data');
-ROute::get('/book/data','Admin\BookController@data')->name('book.data');
+Route::get('/book/data','Admin\BookController@data')->name('book.data');
+Route::get('/member/data','Admin\MemberController@data')->name('member.data');
 
 Route::resource('/category','Admin\CategoryController');
 Route::resource('/book','Admin\BookController');

@@ -22,8 +22,7 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $ajax       = route('book.data');
-        $datas      = Book::all();
-        return view($this->folder.'.index', compact('ajax','datas'));
+        return view($this->folder.'.index', compact('ajax'));
     }
 
     /**
@@ -69,7 +68,6 @@ class BookController extends Controller
         $form   = $formBuilder->create(\App\Forms\BookForm::class);
         if(!$form->isValid())
         {
-            // dd($request->all());
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
         Book::create($request->all());

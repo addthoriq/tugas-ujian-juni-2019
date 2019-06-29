@@ -21,7 +21,6 @@ class CreateMembersTable extends Migration
             $table->boolean('gender');
             $table->string('place_of_birth',50);
             $table->date('date_of_birth');
-            $table->string('status');
             $table->timestamps();
         });
     }

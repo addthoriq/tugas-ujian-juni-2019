@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    protected $fillable     = [
+    protected $guarded     = [
         'id',
     ];
     public function loan()
