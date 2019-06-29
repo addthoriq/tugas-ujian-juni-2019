@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Book;
+use App\Model\Category;
 use DataTables;
 use Form;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -19,6 +20,7 @@ class BookController extends Controller
      */
     protected $folder   = 'books';
     protected $rdr      = 'book/';
+    protected $bookForm = \App\Forms\CategoryForm::class;
     public function index(Request $request)
     {
         $ajax       = route('book.data');
@@ -51,7 +53,8 @@ class BookController extends Controller
             'method'    => 'POST',
             'url'       => route('book.store'),
         ]);
-        return view($this->folder.'.create', compact('form'));
+        $datas  = Category::all();
+        return view($this->folder.'.create', compact('form','datas'));
     }
 
     /**
@@ -60,9 +63,16 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, FormBuilder $formBuilder)
     {
-        //
+        $form   = $formBuilder->create($this->bookForm);
+        if(!$form->isValid())
+        {
+            return redirecr()->back()->withErrors($form->getErrors())->withInput();
+        }
+        dd($request->all());
+        Book::create($request->all());
+        return redirect($this->rdr)->with('success','Data berhasil ditambahkan!');
     }
 
     /**

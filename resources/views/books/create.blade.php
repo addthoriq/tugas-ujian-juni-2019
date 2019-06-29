@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Daftar Buku')
 @section('css')
-    <link rel="stylesheet" href="{{asset('adminlte3/plugins/datatables/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte3/plugins/select2/css/select2.min.css')}}">
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -35,10 +35,14 @@
         <div class="card-body">
 
             {!! form_start($form) !!}
+            {!! form_row($form->category_id)!!}
+            {!! form_row($form->isbn)!!}
             {!! form_row($form->author)!!}
             {!! form_row($form->title)!!}
             {!! form_row($form->publisher)!!}
-            {!! form_row($form->isbn)!!}
+            {!! form_row($form->place_of_released)!!}
+            {!! form_row($form->quantity)!!}
+            {!! form_row($form->date_of_released)!!}
 
         </div>
 
@@ -54,4 +58,12 @@
 
     </section>
     <!-- /.content -->
+@endsection
+@section('script')
+<script src="{{asset('adminlte3/plugins/select2/js/select2.full.min.js')}}"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.select2').select2()
+    })
+</script>
 @endsection

@@ -42,7 +42,7 @@
                  <th>Judul</th>
                  <th>Penerbit</th>
                  <th>Jumlah</th>
-                 <th>Usia</th>
+                 <th>Tahun terbit</th>
                  <th>Action</th>
                </tr>
                </thead>

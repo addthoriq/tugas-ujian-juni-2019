@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 use Kris\LaravelFormBuilder\Field;
+use App\Model\Category;
 
 class BookForm extends Form
 {
@@ -12,6 +13,18 @@ class BookForm extends Form
     {
         $this
             ->add(
+                'category_id', Field::SELECT, [
+                    'attr'          => [
+                        'class' => 'form-control select2',
+                        'style' => 'width: 100%',
+                    ],
+                    'choices'       => Category::pluck('name','id')->toArray(),
+                    'empty_value'   => '--- Pilih Kategori ---',
+                    'rules'         => 'required|max:30',
+                    'label'         => 'Kategori Buku',
+                ]
+            )
+            ->add(
                 'author', Field::TEXT, [
                     'rules'     => 'required|max:30',
                     'label'     => 'Penulis',
@@ -19,19 +32,37 @@ class BookForm extends Form
             )
             ->add(
                 'title', Field::TEXT, [
-                    'rules'     => 'required|max:30',
+                    'rules'     => 'required|max:50',
                     'label'     => 'Judul',
                 ]
             )
             ->add(
                 'publisher', Field::TEXT, [
-                    'rules'     => 'required|max:30',
+                    'rules'     => 'required|max:50',
                     'label'     => 'Penerbit',
                 ]
             )
             ->add(
+                'place_of_released', Field::NUMBER, [
+                    'rules'     => 'required|max:4',
+                    'label'     => 'Tahun Terbit',
+                ]
+            )
+            ->add(
+                'year_of_released', Field::NUMBER, [
+                    'rules'     => 'required|max:4',
+                    'label'     => 'Tahun Terbit',
+                ]
+            )
+            ->add(
+                'quantity', Field::NUMBER, [
+                    'rules'     => 'required|max:11',
+                    'label'     => 'Jumlah Buku',
+                ]
+            )
+            ->add(
                 'isbn', Field::TEXT, [
-                    'rules'     => 'required|max:30',
+                    'rules'     => 'required|max:18',
                     'label'     => 'Nomor ISBN',
                 ]
             )

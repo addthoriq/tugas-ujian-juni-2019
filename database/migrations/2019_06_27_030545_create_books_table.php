@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('publisher',50);
             $table->integer('quantity');
             $table->string('place_of_released',50);
-            $table->date('date_of_released');
+            $table->string('year_of_released',4);
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
