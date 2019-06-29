@@ -126,6 +126,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::find($id)->delete();
+        return redirect($this->rdr)->with('success','Data berhasil dihapus!');
     }
 }

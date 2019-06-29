@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Book;
+use DataTables;
+use Form;
+use Kris\LaravelFormBuilder\FormBuilder;
+use App\Forms\BookForm;
 
 class BookController extends Controller
 {
@@ -12,9 +17,12 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    protected $folder   = 'books';
+    protected $rdr      = 'book/';
+    public function index(Request $request)
     {
-        //
+        $ajax       = route('book.data');
+        return view($this->folder.'.index', compact('ajax'));
     }
 
     /**
@@ -22,9 +30,28 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function data(Request $request)
     {
-        //
+        $data   = Book::all();
+        return DataTables::of($data)
+            ->addColumn('action', function ($index)
+            {
+                $tag        = Form::open(array("url" => route('book.destroy',$index->id), "method" => "DELETE"));
+                $tag       .= "<a href=".route('category.edit',$index->id)." class='btn btn-primary btn-sm'><i class='fa fa-edit'></i></a> ";
+                $tag       .= " <button type='submit' class='btn btn-danger btn-sm' onclick='javascript:return confirm(`Apakah anda yakin ingin menghapus data ini?`)'><i class='fa fa-trash'></i></button>";
+                $tag       .= Form::close();
+                return $tag;
+            })
+            ->rawColumns(['id','action'])
+            ->make(true);
+    }
+    public function create(FormBuilder $formBuilder)
+    {
+        $form   = $formBuilder->create(\App\Forms\BookForm::class,[
+            'method'    => 'POST',
+            'url'       => route('book.store'),
+        ]);
+        return view($this->folder.'.create', compact('form'));
     }
 
     /**
@@ -80,6 +107,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Book::find($id)->delete();
+        return redircet($this->rdr)->with('success','Data berhasil dihapus!');
     }
 }
