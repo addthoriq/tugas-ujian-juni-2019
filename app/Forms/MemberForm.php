@@ -55,6 +55,7 @@ class MemberForm extends Form
             )
             ->add(
                 'date_of_birth', Field::DATE, [
+                    'rules' =>'required',
                     'label' => 'Tanggal Lahir',
                 ],
             )

@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::get('/category/data','Admin\CategoryController@data')->name('category.data');
 Route::get('/book/data','Admin\BookController@data')->name('book.data');
 Route::get('/member/data','Admin\MemberController@data')->name('member.data');
+Route::get('/loan-book/data','Admin\LoanController@data')->name('loan-book.data');
 
 Route::resource('/category','Admin\CategoryController');
 Route::resource('/book','Admin\BookController');

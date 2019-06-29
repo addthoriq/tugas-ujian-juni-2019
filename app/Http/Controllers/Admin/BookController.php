@@ -127,6 +127,6 @@ class BookController extends Controller
     public function destroy($id)
     {
         Book::find($id)->delete();
-        return redircet($this->rdr)->with('success','Data berhasil dihapus!');
+        return redirect($this->rdr)->with('success','Data berhasil dihapus!');
     }
 }
