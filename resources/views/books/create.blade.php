@@ -41,8 +41,8 @@
             {!! form_row($form->title)!!}
             {!! form_row($form->publisher)!!}
             {!! form_row($form->place_of_released)!!}
+            {!! form_row($form->year_of_released)!!}
             {!! form_row($form->quantity)!!}
-            {!! form_row($form->date_of_released)!!}
 
         </div>
 

@@ -21,6 +21,5 @@ ROute::get('/book/data','Admin\BookController@data')->name('book.data');
 
 Route::resource('/category','Admin\CategoryController');
 Route::resource('/book','Admin\BookController');
-Route::resource('/age-setting','Admin\AgeController');
 Route::resource('/loan-book','Admin\LoanController');
 Route::resource('/member','Admin\MemberController');

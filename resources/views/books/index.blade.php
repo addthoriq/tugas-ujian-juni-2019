@@ -75,7 +75,7 @@
                 { data: 'title', searchable: true, orderable: true},
                 { data: 'publisher', searchable: true, orderable: true},
                 { data: 'quantity', searchable: true, orderable: true},
-                { data: 'age_id', searchable: true, orderable: true},
+                { data: 'year_of_released', searchable: true, orderable: true},
                 { data: 'action', searchable: false, orderable: false}
             ],
             columnDefs: [{

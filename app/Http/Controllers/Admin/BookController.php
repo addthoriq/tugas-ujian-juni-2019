@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Book;
-use App\Model\Category;
 use DataTables;
 use Form;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -20,11 +19,11 @@ class BookController extends Controller
      */
     protected $folder   = 'books';
     protected $rdr      = 'book/';
-    protected $bookForm = \App\Forms\CategoryForm::class;
     public function index(Request $request)
     {
         $ajax       = route('book.data');
-        return view($this->folder.'.index', compact('ajax'));
+        $datas      = Book::all();
+        return view($this->folder.'.index', compact('ajax','datas'));
     }
 
     /**
@@ -36,15 +35,18 @@ class BookController extends Controller
     {
         $data   = Book::all();
         return DataTables::of($data)
+            ->editColumn('category_id',function($index){
+                return isset($index->category->name)?$index->category->name : '-';
+            })
             ->addColumn('action', function ($index)
             {
                 $tag        = Form::open(array("url" => route('book.destroy',$index->id), "method" => "DELETE"));
-                $tag       .= "<a href=".route('category.edit',$index->id)." class='btn btn-primary btn-sm'><i class='fa fa-edit'></i></a> ";
+                $tag       .= "<a href=".route('book.edit',$index->id)." class='btn btn-primary btn-sm'><i class='fa fa-edit'></i></a> ";
                 $tag       .= " <button type='submit' class='btn btn-danger btn-sm' onclick='javascript:return confirm(`Apakah anda yakin ingin menghapus data ini?`)'><i class='fa fa-trash'></i></button>";
                 $tag       .= Form::close();
                 return $tag;
             })
-            ->rawColumns(['id','action'])
+            ->rawColumns(['id','category_id','action'])
             ->make(true);
     }
     public function create(FormBuilder $formBuilder)
@@ -53,8 +55,7 @@ class BookController extends Controller
             'method'    => 'POST',
             'url'       => route('book.store'),
         ]);
-        $datas  = Category::all();
-        return view($this->folder.'.create', compact('form','datas'));
+        return view($this->folder.'.create', compact('form'));
     }
 
     /**
@@ -65,12 +66,12 @@ class BookController extends Controller
      */
     public function store(Request $request, FormBuilder $formBuilder)
     {
-        $form   = $formBuilder->create($this->bookForm);
+        $form   = $formBuilder->create(\App\Forms\BookForm::class);
         if(!$form->isValid())
         {
-            return redirecr()->back()->withErrors($form->getErrors())->withInput();
+            // dd($request->all());
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-        dd($request->all());
         Book::create($request->all());
         return redirect($this->rdr)->with('success','Data berhasil ditambahkan!');
     }
@@ -92,9 +93,14 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FormBuilder $formBuilder, $id)
     {
-        //
+        $form       = $formBuilder->create(\App\Forms\BookForm::class, [
+            'method'    => 'PUT',
+            'url'       => route('book.update',$id),
+        ]);
+        $books      = Book::find($id);
+        return view($this->folder.'.edit',compact('books','form'));
     }
 
     /**
@@ -104,9 +110,14 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, FormBuilder $formBuilder)
     {
-        //
+        $form       = $formBuilder->create(\App\Forms\BookForm::class);
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+        Book::find($id)->update($request->all());
+        return redirect($this->rdr)->with('success','Data berhasil diubah!');
     }
 
     /**

@@ -20,7 +20,7 @@ class BookForm extends Form
                     ],
                     'choices'       => Category::pluck('name','id')->toArray(),
                     'empty_value'   => '--- Pilih Kategori ---',
-                    'rules'         => 'required|max:30',
+                    'rules'         => 'required',
                     'label'         => 'Kategori Buku',
                 ]
             )
@@ -43,20 +43,20 @@ class BookForm extends Form
                 ]
             )
             ->add(
-                'place_of_released', Field::NUMBER, [
-                    'rules'     => 'required|max:4',
-                    'label'     => 'Tahun Terbit',
+                'place_of_released', Field::TEXT, [
+                    'rules'     => 'required|max:30',
+                    'label'     => 'Tempat Terbit',
                 ]
             )
             ->add(
                 'year_of_released', Field::NUMBER, [
-                    'rules'     => 'required|max:4',
+                    'rules'     => 'required',
                     'label'     => 'Tahun Terbit',
                 ]
             )
             ->add(
                 'quantity', Field::NUMBER, [
-                    'rules'     => 'required|max:11',
+                    'rules'     => 'required',
                     'label'     => 'Jumlah Buku',
                 ]
             )
