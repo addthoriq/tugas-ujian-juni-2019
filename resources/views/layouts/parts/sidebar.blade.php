@@ -73,14 +73,6 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{route('age-setting.index')}}" class="nav-link {{Request::is('age-setting','age-setting/create')?'active':''}}">
-            <i class="nav-icon fa fa-random"></i>
-            <p>
-              Batas Usia
-            </p>
-          </a>
-        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

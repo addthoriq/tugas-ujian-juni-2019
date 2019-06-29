@@ -13,8 +13,4 @@ class Member extends Model
     {
         return $this->hasMany(Loan::class);
     }
-    public function age()
-    {
-        return $this->belongsTo(Age::class);
-    }
 }
